@@ -95,9 +95,40 @@ int main(void)
   MX_USART2_UART_Init();
   /* USER CODE BEGIN 2 */
   //--------------------------------------------------------------------------------
+enum _StateNumber
+{
+	StateNumber_0 = 0b0,
+	StateNumber_1 = 0b1,
+	StateNumber_2 = 0b10,
+	StateNumber_3 = 0b11,
+	StateNumber_4 = 0b100,
+	StateNumber_5 = 0b101,
+	StateNumber_6 = 0b110,
+	StateNumber_7 = 0b111,
+	StateNumber_8 = 0b1000,
+	StateNumber_9 = 0b1001,
+};
+enum _StateDisplay
+{
+	StateDisplay_Start = 0,
+	StateDisplay_SN1 = 10,
+	StateDisplay_SN2 = 20,
+	StateDisplay_SN3 = 30,
+	StateDisplay_SN4 = 40,
+	StateDisplay_SN5 = 50,
+	StateDisplay_SN6 = 60,
+	StateDisplay_SN7 = 70,
+	StateDisplay_SN8 = 80,
+	StateDisplay_SN9 = 90,
+	StateDisplay_SN10 = 100,
+	StateDisplay_SN11 = 110,
+	StateDisplay_Error = 120,
+	StateDisplay_OK = 130,
+	StateDisplay_LED2 = 140
+};
 
-
-
+uint16_t STATE_Display = 0;
+uint16_t DataBase = 0;
   //--------------------------------------------------------------------------------
   /* USER CODE END 2 */
 
@@ -108,7 +139,446 @@ int main(void)
   while (1)
   {
 	  ButtonMatrixUpdate();
-
+	  switch(STATE_Display)
+	  {
+	  	case StateDisplay_Start:
+	  		DataBase = 0b0;
+	  		STATE_Display = StateDisplay_SN1;
+	  		break;
+	  	case StateDisplay_SN1:
+	  		if(ButtonMatrixState == 0b0)
+	  		{
+	  			STATE_Display = StateDisplay_SN1;
+	  		}
+	  		else if(ButtonMatrixState == 0b1000000)
+	  		{
+	  			STATE_Display = StateDisplay_SN2;
+	  		}
+	  		else if(ButtonMatrixState == 0b1000)
+	  		{
+	  			STATE_Display = StateDisplay_Start;
+	  		}
+	  		else if(ButtonMatrixState == 0b1000000000000000)
+	  		{
+	  			STATE_Display = StateDisplay_SN1;
+	  		}
+	  		else if(ButtonMatrixState == 0b10000000)
+	  		{
+	  			STATE_Display = StateDisplay_SN1;
+	  		}
+	  		else if(ButtonMatrixState == 0b100000000000)
+	  		{
+	  			STATE_Display = StateDisplay_SN1;
+	  		}
+	  		else if(ButtonMatrixState == 0b10000000000000)
+	  		{
+	  			STATE_Display = StateDisplay_SN1;
+	  		}
+	  		else if(ButtonMatrixState == 0b100000000000000)
+	  		{
+	  			STATE_Display = StateDisplay_SN1;
+	  		}
+	  		else
+	  		{
+	  			STATE_Display = StateDisplay_Error;
+	  		}
+	  		break;
+	  	case StateDisplay_SN2:
+	  		if(ButtonMatrixState == 0b0)
+	  		{
+	  			STATE_Display = StateDisplay_SN1;
+	  		}
+	  		else if(ButtonMatrixState == 0b1000000000)
+	  		{
+		  		STATE_Display = StateDisplay_SN3;
+	  		}
+	  		else if(ButtonMatrixState == 0b1000)
+	  		{
+	  			STATE_Display = StateDisplay_Start;
+	  		}
+	  		else if(ButtonMatrixState == 0b1000000000000000)
+	  		{
+	  			STATE_Display = StateDisplay_SN1;
+	  		}
+	  		else if(ButtonMatrixState == 0b10000000)
+	  		{
+	  			STATE_Display = StateDisplay_SN1;
+	  		}
+	  		else if(ButtonMatrixState == 0b100000000000)
+	  		{
+	  			STATE_Display = StateDisplay_SN1;
+	  		}
+	  		else if(ButtonMatrixState == 0b10000000000000)
+	  		{
+	  			STATE_Display = StateDisplay_SN1;
+	  		}
+	  		else if(ButtonMatrixState == 0b100000000000000)
+	  		{
+	  			STATE_Display = StateDisplay_SN1;
+	  		}
+	  		else
+	  		{
+	  			STATE_Display = StateDisplay_Error;
+	  		}
+	  		break;
+	  	case StateDisplay_SN3:
+	  		if(ButtonMatrixState == 0b0)
+	  		{
+	  			STATE_Display = StateDisplay_SN1;
+	  		}
+	  		else if(ButtonMatrixState == 0b10000000000)
+	  		{
+		  		STATE_Display = StateDisplay_SN4;
+	  		}
+	  		else if(ButtonMatrixState == 0b1000)
+	  		{
+	  			STATE_Display = StateDisplay_Start;
+	  		}
+	  		else if(ButtonMatrixState == 0b1000000000000000)
+	  		{
+	  			STATE_Display = StateDisplay_SN1;
+	  		}
+	  		else if(ButtonMatrixState == 0b10000000)
+	  		{
+	  			STATE_Display = StateDisplay_SN1;
+	  		}
+	  		else if(ButtonMatrixState == 0b100000000000)
+	  		{
+	  			STATE_Display = StateDisplay_SN1;
+	  		}
+	  		else if(ButtonMatrixState == 0b10000000000000)
+	  		{
+	  			STATE_Display = StateDisplay_SN1;
+	  		}
+	  		else if(ButtonMatrixState == 0b100000000000000)
+	  		{
+	  			STATE_Display = StateDisplay_SN1;
+	  		}
+	  		else
+	  		{
+	  			STATE_Display = StateDisplay_Error;
+	  		}
+	  		break;
+	  	case StateDisplay_SN4:
+	  		if(ButtonMatrixState == 0b0)
+	  		{
+	  			STATE_Display = StateDisplay_SN1;
+	  		}
+	  		else if(ButtonMatrixState == 0b10000)
+	  		{
+		  		STATE_Display = StateDisplay_SN5;
+	  		}
+	  		else if(ButtonMatrixState == 0b1000)
+	  		{
+	  			STATE_Display = StateDisplay_Start;
+	  		}
+	  		else if(ButtonMatrixState == 0b1000000000000000)
+	  		{
+	  			STATE_Display = StateDisplay_SN1;
+	  		}
+	  		else if(ButtonMatrixState == 0b10000000)
+	  		{
+	  			STATE_Display = StateDisplay_SN1;
+	  		}
+	  		else if(ButtonMatrixState == 0b100000000000)
+	  		{
+	  			STATE_Display = StateDisplay_SN1;
+	  		}
+	  		else if(ButtonMatrixState == 0b10000000000000)
+	  		{
+	  			STATE_Display = StateDisplay_SN1;
+	  		}
+	  		else if(ButtonMatrixState == 0b100000000000000)
+	  		{
+	  			STATE_Display = StateDisplay_SN1;
+	  		}
+	  		else
+	  		{
+	  			STATE_Display = StateDisplay_Error;
+	  		}
+	  		break;
+	  	case StateDisplay_SN5:
+	  		if(ButtonMatrixState == 0b0)
+	  		{
+	  			STATE_Display = StateDisplay_SN1;
+	  		}
+	  		else if(ButtonMatrixState == 0b1000000000000)
+	  		{
+		  		STATE_Display = StateDisplay_SN6;
+	  		}
+	  		else if(ButtonMatrixState == 0b1000)
+	  		{
+	  			STATE_Display = StateDisplay_Start;
+	  		}
+	  		else if(ButtonMatrixState == 0b1000000000000000)
+	  		{
+	  			STATE_Display = StateDisplay_SN1;
+	  		}
+	  		else if(ButtonMatrixState == 0b10000000)
+	  		{
+	  			STATE_Display = StateDisplay_SN1;
+	  		}
+	  		else if(ButtonMatrixState == 0b100000000000)
+	  		{
+	  			STATE_Display = StateDisplay_SN1;
+	  		}
+	  		else if(ButtonMatrixState == 0b10000000000000)
+	  		{
+	  			STATE_Display = StateDisplay_SN1;
+	  		}
+	  		else if(ButtonMatrixState == 0b100000000000000)
+	  		{
+	  			STATE_Display = StateDisplay_SN1;
+	  		}
+	  		else
+	  		{
+	  			STATE_Display = StateDisplay_Error;
+	  		}
+	  		break;
+	  	case StateDisplay_SN6:
+	  		if(ButtonMatrixState == 0b0)
+	  		{
+	  			STATE_Display = StateDisplay_SN1;
+	  		}
+	  		else if(ButtonMatrixState == 0b100000)
+	  		{
+		  		STATE_Display = StateDisplay_SN7;
+	  		}
+	  		else if(ButtonMatrixState == 0b1000)
+	  		{
+	  			STATE_Display = StateDisplay_Start;
+	  		}
+	  		else if(ButtonMatrixState == 0b1000000000000000)
+	  		{
+	  			STATE_Display = StateDisplay_SN1;
+	  		}
+	  		else if(ButtonMatrixState == 0b10000000)
+	  		{
+	  			STATE_Display = StateDisplay_SN1;
+	  		}
+	  		else if(ButtonMatrixState == 0b100000000000)
+	  		{
+	  			STATE_Display = StateDisplay_SN1;
+	  		}
+	  		else if(ButtonMatrixState == 0b10000000000000)
+	  		{
+	  			STATE_Display = StateDisplay_SN1;
+	  		}
+	  		else if(ButtonMatrixState == 0b100000000000000)
+	  		{
+	  			STATE_Display = StateDisplay_SN1;
+	  		}
+	  		else
+	  		{
+	  			STATE_Display = StateDisplay_Error;
+	  		}
+	  		break;
+	  	case StateDisplay_SN7:
+	  		if(ButtonMatrixState == 0b0)
+	  		{
+	  			STATE_Display = StateDisplay_SN1;
+	  		}
+	  		else if(ButtonMatrixState == 0b1000000000000)
+	  		{
+		  		STATE_Display = StateDisplay_SN8;
+	  		}
+	  		else if(ButtonMatrixState == 0b1000)
+	  		{
+	  			STATE_Display = StateDisplay_Start;
+	  		}
+	  		else if(ButtonMatrixState == 0b1000000000000000)
+	  		{
+	  			STATE_Display = StateDisplay_SN1;
+	  		}
+	  		else if(ButtonMatrixState == 0b10000000)
+	  		{
+	  			STATE_Display = StateDisplay_SN1;
+	  		}
+	  		else if(ButtonMatrixState == 0b100000000000)
+	  		{
+	  			STATE_Display = StateDisplay_SN1;
+	  		}
+	  		else if(ButtonMatrixState == 0b10000000000000)
+	  		{
+	  			STATE_Display = StateDisplay_SN1;
+	  		}
+	  		else if(ButtonMatrixState == 0b100000000000000)
+	  		{
+	  			STATE_Display = StateDisplay_SN1;
+	  		}
+	  		else
+	  		{
+	  			STATE_Display = StateDisplay_Error;
+	  		}
+	  		break;
+	  	case StateDisplay_SN8:
+	  		if(ButtonMatrixState == 0b0)
+	  		{
+	  			STATE_Display = StateDisplay_SN1;
+	  		}
+	  		else if(ButtonMatrixState == 0b1000000000000)
+	  		{
+		  		STATE_Display = StateDisplay_SN8;
+	  		}
+	  		else if(ButtonMatrixState == 0b1000)
+	  		{
+	  			STATE_Display = StateDisplay_Start;
+	  		}
+	  		else if(ButtonMatrixState == 0b1000000000000000)
+	  		{
+	  			STATE_Display = StateDisplay_SN1;
+	  		}
+	  		else if(ButtonMatrixState == 0b10000000)
+	  		{
+	  			STATE_Display = StateDisplay_SN1;
+	  		}
+	  		else if(ButtonMatrixState == 0b100000000000)
+	  		{
+	  			STATE_Display = StateDisplay_SN1;
+	  		}
+	  		else if(ButtonMatrixState == 0b10000000000000)
+	  		{
+	  			STATE_Display = StateDisplay_SN1;
+	  		}
+	  		else if(ButtonMatrixState == 0b100000000000000)
+	  		{
+	  			STATE_Display = StateDisplay_SN1;
+	  		}
+	  		else
+	  		{
+	  			STATE_Display = StateDisplay_Error;
+	  		}
+	  		break;
+	  	case StateDisplay_SN9:
+	  		if(ButtonMatrixState == 0b0)
+	  		{
+	  			STATE_Display = StateDisplay_SN1;
+	  		}
+	  		else if(ButtonMatrixState == 0b1000000000000)
+	  		{
+		  		STATE_Display = StateDisplay_SN10;
+	  		}
+	  		else if(ButtonMatrixState == 0b1000)
+	  		{
+	  			STATE_Display = StateDisplay_Start;
+	  		}
+	  		else if(ButtonMatrixState == 0b1000000000000000)
+	  		{
+	  			STATE_Display = StateDisplay_SN1;
+	  		}
+	  		else if(ButtonMatrixState == 0b10000000)
+	  		{
+	  			STATE_Display = StateDisplay_SN1;
+	  		}
+	  		else if(ButtonMatrixState == 0b100000000000)
+	  		{
+	  			STATE_Display = StateDisplay_SN1;
+	  		}
+	  		else if(ButtonMatrixState == 0b10000000000000)
+	  		{
+	  			STATE_Display = StateDisplay_SN1;
+	  		}
+	  		else if(ButtonMatrixState == 0b100000000000000)
+	  		{
+	  			STATE_Display = StateDisplay_SN1;
+	  		}
+	  		else
+	  		{
+	  			STATE_Display = StateDisplay_Error;
+	  		}
+	  		break;
+	  	case StateDisplay_SN10:
+	  		if(ButtonMatrixState == 0b0)
+	  		{
+	  			STATE_Display = StateDisplay_SN1;
+	  		}
+	  		else if(ButtonMatrixState == 0b100000000)
+	  		{
+		  		STATE_Display = StateDisplay_SN11;
+	  		}
+	  		else if(ButtonMatrixState == 0b1000)
+	  		{
+	  			STATE_Display = StateDisplay_Start;
+	  		}
+	  		else if(ButtonMatrixState == 0b1000000000000000)
+	  		{
+	  			STATE_Display = StateDisplay_SN1;
+	  		}
+	  		else if(ButtonMatrixState == 0b10000000)
+	  		{
+	  			STATE_Display = StateDisplay_SN1;
+	  		}
+	  		else if(ButtonMatrixState == 0b100000000000)
+	  		{
+	  			STATE_Display = StateDisplay_SN1;
+	  		}
+	  		else if(ButtonMatrixState == 0b10000000000000)
+	  		{
+	  			STATE_Display = StateDisplay_SN1;
+	  		}
+	  		else if(ButtonMatrixState == 0b100000000000000)
+	  		{
+	  			STATE_Display = StateDisplay_SN1;
+	  		}
+	  		else
+	  		{
+	  			STATE_Display = StateDisplay_Error;
+	  		}
+	  		break;
+	  	case StateDisplay_SN11:
+	  		if(ButtonMatrixState == 0b0)
+	  		{
+	  			STATE_Display = StateDisplay_SN1;
+	  		}
+	  		else if(ButtonMatrixState == 0b1000000)
+	  		{
+		  		STATE_Display = StateDisplay_OK;
+	  		}
+	  		else if(ButtonMatrixState == 0b1000)
+	  		{
+	  			STATE_Display = StateDisplay_Start;
+	  		}
+	  		else if(ButtonMatrixState == 0b1000000000000000)
+	  		{
+	  			STATE_Display = StateDisplay_SN1;
+	  		}
+	  		else if(ButtonMatrixState == 0b10000000)
+	  		{
+	  			STATE_Display = StateDisplay_SN1;
+	  		}
+	  		else if(ButtonMatrixState == 0b100000000000)
+	  		{
+	  			STATE_Display = StateDisplay_SN1;
+	  		}
+	  		else if(ButtonMatrixState == 0b10000000000000)
+	  		{
+	  			STATE_Display = StateDisplay_SN1;
+	  		}
+	  		else if(ButtonMatrixState == 0b100000000000000)
+	  		{
+	  			STATE_Display = StateDisplay_SN1;
+	  		}
+	  		else
+	  		{
+	  			STATE_Display = StateDisplay_Error;
+	  		}
+	  		break;
+	  	case StateDisplay_OK:
+	  		if(ButtonMatrixState == 0b1000)
+	  		{
+	  			STATE_Display = StateDisplay_Start;
+	  		}
+	  	case StateDisplay_Error:
+	  		if(ButtonMatrixState == 0b1000)
+	  		{
+	  			STATE_Display = StateDisplay_Start;
+	  		}
+	  		else
+	  		{
+		  		STATE_Display = StateDisplay_Error;
+	  		}
+	  		break;
+	  }
 
 
 
