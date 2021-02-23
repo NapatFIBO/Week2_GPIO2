@@ -129,6 +129,7 @@ enum _StateDisplay
 
 uint16_t STATE_Display = 0;
 uint16_t DataBase = 0;
+uint16_t ButtonState[2];
   //--------------------------------------------------------------------------------
   /* USER CODE END 2 */
 
@@ -139,6 +140,7 @@ uint16_t DataBase = 0;
   while (1)
   {
 	  ButtonMatrixUpdate();
+	  ButtonState[0] = ButtonMatrixState;
 	  switch(STATE_Display)
 	  {
 	  	case StateDisplay_Start:
@@ -579,6 +581,7 @@ uint16_t DataBase = 0;
 	  		}
 	  		break;
 	  }
+	  ButtonState[1] = ButtonState[0];
 
 
 

@@ -1,6 +1,6 @@
 main.c:71:5:main	16	static
-main.c:599:6:SystemClock_Config	88	static
-main.c:644:13:MX_USART2_UART_Init	8	static
-main.c:677:13:MX_GPIO_Init	48	static
-main.c:752:6:ButtonMatrixUpdate	16	static
-main.c:786:6:Error_Handler	4	static,ignoring_inline_asm
+main.c:602:6:SystemClock_Config	88	static
+main.c:647:13:MX_USART2_UART_Init	8	static
+main.c:680:13:MX_GPIO_Init	48	static
+main.c:755:6:ButtonMatrixUpdate	16	static
+main.c:789:6:Error_Handler	4	static,ignoring_inline_asm
