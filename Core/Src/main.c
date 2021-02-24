@@ -56,6 +56,7 @@ static void MX_USART2_UART_Init(void);
 /* USER CODE BEGIN PFP */
 
 void ButtonMatrixUpdate(); //Scan and Update data of Button Matrix
+uint16_t STATE_Display = 0;
 
 /* USER CODE END PFP */
 
@@ -130,8 +131,8 @@ enum _StateDisplay
 	StateDisplay_LED2 = 140
 };
 
-uint16_t STATE_Display = 0;
-uint16_t DataBase = 0;
+
+//uint16_t DataBase = 0;
 uint16_t ButtonState[2];
   //--------------------------------------------------------------------------------
   /* USER CODE END 2 */
@@ -144,289 +145,300 @@ uint16_t ButtonState[2];
   {
 	  ButtonMatrixUpdate();
 	  ButtonState[0] = ButtonMatrixState;
-	  switch(STATE_Display)
+	  if (STATE_Display == StateDisplay_Start)
 	  {
-	  	case StateDisplay_Start:
-	  		DataBase = 0b0;
-	  		STATE_Display = StateDisplay_SN1;
-	  		break;
-	  	case StateDisplay_SN1:
-	  		if(ButtonMatrixState == StateNumber_NoInput)
-	  		{
-	  			STATE_Display = StateDisplay_SN1;
-	  		}
-	  		else if(ButtonMatrixState == StateNumber_6)
-	  		{
-	  			STATE_Display = StateDisplay_SN2;
-	  		}
-	  		else if(ButtonMatrixState == StateNumber_Clear)
-	  		{
-	  			STATE_Display = StateDisplay_Start;
-	  		}
-	  		else if(ButtonMatrixState == StateNumber_OK)
-	  		{
-	  			STATE_Display = StateDisplay_SN1;
-	  		}
-	  		else
-	  		{
-	  			STATE_Display = StateDisplay_Error;
-	  		}
-	  		break;
-	  	case StateDisplay_SN2:
-	  		if(ButtonMatrixState == StateNumber_NoInput)
-	  		{
-	  			STATE_Display = StateDisplay_SN2;
-	  		}
-	  		else if(ButtonMatrixState == StateNumber_2)
-	  		{
-	  			STATE_Display = StateDisplay_SN3;
-	  		}
-	  		else if(ButtonMatrixState == StateNumber_Clear)
-	  		{
-	  			STATE_Display = StateDisplay_Start;
-	  		}
-	  		else if(ButtonMatrixState == StateNumber_OK)
-	  		{
-	  			STATE_Display = StateDisplay_SN2;
-	  		}
-	  		else
-	  		{
-	  			STATE_Display = StateDisplay_Error;
-	  		}
-	  		break;
-	  	case StateDisplay_SN3:
-	  		if(ButtonMatrixState == StateNumber_NoInput)
-	  		{
-	  			STATE_Display = StateDisplay_SN3;
-	  		}
-	  		else if(ButtonMatrixState == StateNumber_3)
-	  		{
-	  			STATE_Display = StateDisplay_SN4;
-	  		}
-	  		else if(ButtonMatrixState == StateNumber_Clear)
-	  		{
-	  			STATE_Display = StateDisplay_Start;
-	  		}
-	  		else if(ButtonMatrixState == StateNumber_OK)
-	  		{
-	  			STATE_Display = StateDisplay_SN3;
-	  		}
-	  		else
-	  		{
-	  			STATE_Display = StateDisplay_Error;
-	  		}
-	  		break;
-	  	case StateDisplay_SN4:
-	  		if(ButtonMatrixState == StateNumber_NoInput)
-	  		{
-	  			STATE_Display = StateDisplay_SN4;
-	  		}
-	  		else if(ButtonMatrixState == StateNumber_4)
-	  		{
-	  			STATE_Display = StateDisplay_SN5;
-	  		}
-	  		else if(ButtonMatrixState == StateNumber_Clear)
-	  		{
-	  			STATE_Display = StateDisplay_Start;
-	  		}
-	  		else if(ButtonMatrixState == StateNumber_OK)
-	  		{
-	  			STATE_Display = StateDisplay_SN4;
-	  		}
-	  		else
-	  		{
-	  			STATE_Display = StateDisplay_Error;
-	  		}
-	  		break;
-	  	case StateDisplay_SN5:
-	  		if(ButtonMatrixState == StateNumber_NoInput)
-	  		{
-	  			STATE_Display = StateDisplay_SN5;
-	  		}
-	  		else if(ButtonMatrixState == StateNumber_0)
-	  		{
-	  			STATE_Display = StateDisplay_SN6;
-	  		}
-	  		else if(ButtonMatrixState == StateNumber_Clear)
-	  		{
-	  			STATE_Display = StateDisplay_Start;
-	  		}
-	  		else if(ButtonMatrixState == StateNumber_OK)
-	  		{
-	  			STATE_Display = StateDisplay_SN5;
-	  		}
-	  		else
-	  		{
-	  			STATE_Display = StateDisplay_Error;
-	  		}
-	  		break;
-	  	case StateDisplay_SN6:
-	  		if(ButtonMatrixState == StateNumber_NoInput)
-	  		{
-	  			STATE_Display = StateDisplay_SN6;
-	  		}
-	  		else if(ButtonMatrixState == StateNumber_5)
-	  		{
-	  			STATE_Display = StateDisplay_SN7;
-	  		}
-	  		else if(ButtonMatrixState == StateNumber_Clear)
-	  		{
-	  			STATE_Display = StateDisplay_Start;
-	  		}
-	  		else if(ButtonMatrixState == StateNumber_OK)
-	  		{
-	  			STATE_Display = StateDisplay_SN6;
-	  		}
-	  		else
-	  		{
-	  			STATE_Display = StateDisplay_Error;
-	  		}
-	  		break;
-	  	case StateDisplay_SN7:
-	  		if(ButtonMatrixState == StateNumber_NoInput)
-	  		{
-	  			STATE_Display = StateDisplay_SN7;
-	  		}
-	  		else if(ButtonMatrixState == StateNumber_0)
-	  		{
-	  			STATE_Display = StateDisplay_SN8;
-	  		}
-	  		else if(ButtonMatrixState == StateNumber_Clear)
-	  		{
-	  			STATE_Display = StateDisplay_Start;
-	  		}
-	  		else if(ButtonMatrixState == StateNumber_OK)
-	  		{
-	  			STATE_Display = StateDisplay_SN8;
-	  		}
-	  		else
-	  		{
-	  			STATE_Display = StateDisplay_Error;
-	  		}
-	  		break;
-	  	case StateDisplay_SN8:
-	  		if(ButtonMatrixState == StateNumber_NoInput)
-	  		{
-	  			STATE_Display = StateDisplay_SN8;
-	  		}
-	  		else if(ButtonMatrixState == StateNumber_0)
-	  		{
-	  			STATE_Display = StateDisplay_SN9;
-	  		}
-	  		else if(ButtonMatrixState == StateNumber_Clear)
-	  		{
-	  			STATE_Display = StateDisplay_Start;
-	  		}
-	  		else if(ButtonMatrixState == StateNumber_OK)
-	  		{
-	  			STATE_Display = StateDisplay_SN8;
-	  		}
-	  		else
-	  		{
-	  			STATE_Display = StateDisplay_Error;
-	  		}
-	  		break;
-	  	case StateDisplay_SN9:
-	  		if(ButtonMatrixState == StateNumber_NoInput)
-	  		{
-	  			STATE_Display = StateDisplay_SN9;
-	  		}
-	  		else if(ButtonMatrixState == StateNumber_0)
-	  		{
-	  			STATE_Display = StateDisplay_SN10;
-	  		}
-	  		else if(ButtonMatrixState == StateNumber_Clear)
-	  		{
-	  			STATE_Display = StateDisplay_Start;
-	  		}
-	  		else if(ButtonMatrixState == StateNumber_OK)
-	  		{
-	  			STATE_Display = StateDisplay_SN9;
-	  		}
-	  		else
-	  		{
-	  			STATE_Display = StateDisplay_Error;
-	  		}
-	  		break;
-	  	case StateDisplay_SN10:
-	  		if(ButtonMatrixState == StateNumber_NoInput)
-	  		{
-	  			STATE_Display = StateDisplay_SN10;
-	  		}
-	  		else if(ButtonMatrixState == StateNumber_1)
-	  		{
-	  			STATE_Display = StateDisplay_SN11;
-	  		}
-	  		else if(ButtonMatrixState == StateNumber_Clear)
-	  		{
-	  			STATE_Display = StateDisplay_Start;
-	  		}
-	  		else if(ButtonMatrixState == StateNumber_OK)
-	  		{
-	  			STATE_Display = StateDisplay_SN10;
-	  		}
-	  		else
-	  		{
-	  			STATE_Display = StateDisplay_Error;
-	  		}
-	  		break;
-	  	case StateDisplay_SN11:
-	  		if(ButtonMatrixState == StateNumber_NoInput)
-	  		{
-	  			STATE_Display = StateDisplay_SN11;
-	  		}
-	  		else if(ButtonMatrixState == StateNumber_6)
-	  		{
-	  			STATE_Display = StateDisplay_OK;
-	  		}
-	  		else if(ButtonMatrixState == StateNumber_Clear)
-	  		{
-	  			STATE_Display = StateDisplay_Start;
-	  		}
-	  		else if(ButtonMatrixState == StateNumber_OK)
-	  		{
-	  			STATE_Display = StateDisplay_SN1;
-	  		}
-	  		else
-	  		{
-	  			STATE_Display = StateDisplay_Error;
-	  		}
-	  		break;
-	  	case StateDisplay_OK:
-	  		if(ButtonMatrixState == StateNumber_NoInput)
-	  		{
-	  			STATE_Display = StateDisplay_OK;
-	  		}
-	  		else if(ButtonMatrixState == StateNumber_OK)
-	  		{
-	  			STATE_Display = StateDisplay_LED2;
-	  		}
-	  		else
-	  		{
-	  			STATE_Display = StateDisplay_Error;
-	  		}
-	  		break;
-	  	case StateDisplay_LED2:
-	  		if(ButtonMatrixState == StateNumber_NoInput)
-	  		{
-	  			STATE_Display = StateDisplay_LED2;
-	  			HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_SET);
-	  		}
-	  		else
-	  		{
-	  			STATE_Display = StateDisplay_Error;
-	  			HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_RESET);
-	  		}
-	  	case StateDisplay_Error:
-	  		if(ButtonMatrixState == StateNumber_Clear)
-	  		{
-	  			STATE_Display = StateDisplay_Start;
-	  		}
-	  		else
-	  		{
-		  		STATE_Display = StateDisplay_Error;
-	  		}
-	  		break;
+		  STATE_Display = StateDisplay_SN1;
+	  }
+
+	  if (ButtonState[0] != 0b0 && ButtonState[1] == 0b0)
+	  {
+		switch(STATE_Display)
+		  {
+			case StateDisplay_SN1:
+				if(ButtonMatrixState == StateNumber_NoInput)
+				{
+					STATE_Display = StateDisplay_SN1;
+				}
+				else if(ButtonMatrixState == StateNumber_6)
+				{
+					STATE_Display = StateDisplay_SN2;
+				}
+				else if(ButtonMatrixState == StateNumber_Clear)
+				{
+					STATE_Display = StateDisplay_Start;
+				}
+				else if(ButtonMatrixState == StateNumber_OK)
+				{
+					STATE_Display = StateDisplay_SN1;
+				}
+				else
+				{
+					STATE_Display = StateDisplay_Error;
+				}
+				break;
+			case StateDisplay_SN2:
+				if(ButtonMatrixState == StateNumber_NoInput)
+				{
+					STATE_Display = StateDisplay_SN2;
+				}
+				else if(ButtonMatrixState == StateNumber_2)
+				{
+					STATE_Display = StateDisplay_SN3;
+				}
+				else if(ButtonMatrixState == StateNumber_Clear)
+				{
+					STATE_Display = StateDisplay_Start;
+				}
+				else if(ButtonMatrixState == StateNumber_OK)
+				{
+					STATE_Display = StateDisplay_SN2;
+				}
+				else
+				{
+					STATE_Display = StateDisplay_Error;
+				}
+				break;
+			case StateDisplay_SN3:
+				if(ButtonMatrixState == StateNumber_NoInput)
+				{
+					STATE_Display = StateDisplay_SN3;
+				}
+				else if(ButtonMatrixState == StateNumber_3)
+				{
+					STATE_Display = StateDisplay_SN4;
+				}
+				else if(ButtonMatrixState == StateNumber_Clear)
+				{
+					STATE_Display = StateDisplay_Start;
+				}
+				else if(ButtonMatrixState == StateNumber_OK)
+				{
+					STATE_Display = StateDisplay_SN3;
+				}
+				else
+				{
+					STATE_Display = StateDisplay_Error;
+				}
+				break;
+			case StateDisplay_SN4:
+				if(ButtonMatrixState == StateNumber_NoInput)
+				{
+					STATE_Display = StateDisplay_SN4;
+				}
+				else if(ButtonMatrixState == StateNumber_4)
+				{
+					STATE_Display = StateDisplay_SN5;
+				}
+				else if(ButtonMatrixState == StateNumber_Clear)
+				{
+					STATE_Display = StateDisplay_Start;
+				}
+				else if(ButtonMatrixState == StateNumber_OK)
+				{
+					STATE_Display = StateDisplay_SN4;
+				}
+				else
+				{
+					STATE_Display = StateDisplay_Error;
+				}
+				break;
+			case StateDisplay_SN5:
+				if(ButtonMatrixState == StateNumber_NoInput)
+				{
+					STATE_Display = StateDisplay_SN5;
+				}
+				else if(ButtonMatrixState == StateNumber_0)
+				{
+					STATE_Display = StateDisplay_SN6;
+				}
+				else if(ButtonMatrixState == StateNumber_Clear)
+				{
+					STATE_Display = StateDisplay_Start;
+				}
+				else if(ButtonMatrixState == StateNumber_OK)
+				{
+					STATE_Display = StateDisplay_SN5;
+				}
+				else
+				{
+					STATE_Display = StateDisplay_Error;
+				}
+				break;
+			case StateDisplay_SN6:
+				if(ButtonMatrixState == StateNumber_NoInput)
+				{
+					STATE_Display = StateDisplay_SN6;
+				}
+				else if(ButtonMatrixState == StateNumber_5)
+				{
+					STATE_Display = StateDisplay_SN7;
+				}
+				else if(ButtonMatrixState == StateNumber_Clear)
+				{
+					STATE_Display = StateDisplay_Start;
+				}
+				else if(ButtonMatrixState == StateNumber_OK)
+				{
+					STATE_Display = StateDisplay_SN6;
+				}
+				else
+				{
+					STATE_Display = StateDisplay_Error;
+				}
+				break;
+			case StateDisplay_SN7:
+				if(ButtonMatrixState == StateNumber_NoInput)
+				{
+					STATE_Display = StateDisplay_SN7;
+				}
+				else if(ButtonMatrixState == StateNumber_0)
+				{
+					STATE_Display = StateDisplay_SN8;
+				}
+				else if(ButtonMatrixState == StateNumber_Clear)
+				{
+					STATE_Display = StateDisplay_Start;
+				}
+				else if(ButtonMatrixState == StateNumber_OK)
+				{
+					STATE_Display = StateDisplay_SN8;
+				}
+				else
+				{
+					STATE_Display = StateDisplay_Error;
+				}
+				break;
+			case StateDisplay_SN8:
+				if(ButtonMatrixState == StateNumber_NoInput)
+				{
+					STATE_Display = StateDisplay_SN8;
+				}
+				else if(ButtonMatrixState == StateNumber_0)
+				{
+					STATE_Display = StateDisplay_SN9;
+				}
+				else if(ButtonMatrixState == StateNumber_Clear)
+				{
+					STATE_Display = StateDisplay_Start;
+				}
+				else if(ButtonMatrixState == StateNumber_OK)
+				{
+					STATE_Display = StateDisplay_SN8;
+				}
+				else
+				{
+					STATE_Display = StateDisplay_Error;
+				}
+				break;
+			case StateDisplay_SN9:
+				if(ButtonMatrixState == StateNumber_NoInput)
+				{
+					STATE_Display = StateDisplay_SN9;
+				}
+				else if(ButtonMatrixState == StateNumber_0)
+				{
+					STATE_Display = StateDisplay_SN10;
+				}
+				else if(ButtonMatrixState == StateNumber_Clear)
+				{
+					STATE_Display = StateDisplay_Start;
+				}
+				else if(ButtonMatrixState == StateNumber_OK)
+				{
+					STATE_Display = StateDisplay_SN9;
+				}
+				else
+				{
+					STATE_Display = StateDisplay_Error;
+				}
+				break;
+			case StateDisplay_SN10:
+				if(ButtonMatrixState == StateNumber_NoInput)
+				{
+					STATE_Display = StateDisplay_SN10;
+				}
+				else if(ButtonMatrixState == StateNumber_1)
+				{
+					STATE_Display = StateDisplay_SN11;
+				}
+				else if(ButtonMatrixState == StateNumber_Clear)
+				{
+					STATE_Display = StateDisplay_Start;
+				}
+				else if(ButtonMatrixState == StateNumber_OK)
+				{
+					STATE_Display = StateDisplay_SN10;
+				}
+				else
+				{
+					STATE_Display = StateDisplay_Error;
+				}
+				break;
+			case StateDisplay_SN11:
+				if(ButtonMatrixState == StateNumber_NoInput)
+				{
+					STATE_Display = StateDisplay_SN11;
+				}
+				else if(ButtonMatrixState == StateNumber_6)
+				{
+					STATE_Display = StateDisplay_OK;
+				}
+				else if(ButtonMatrixState == StateNumber_Clear)
+				{
+					STATE_Display = StateDisplay_Start;
+				}
+				else if(ButtonMatrixState == StateNumber_OK)
+				{
+					STATE_Display = StateDisplay_SN1;
+				}
+				else
+				{
+					STATE_Display = StateDisplay_Error;
+				}
+				break;
+			case StateDisplay_OK:
+				if(ButtonMatrixState == StateNumber_NoInput)
+				{
+					STATE_Display = StateDisplay_OK;
+				}
+				else if(ButtonMatrixState == StateNumber_OK)
+				{
+					STATE_Display = StateDisplay_LED2;
+				}
+				else if(ButtonMatrixState == StateNumber_Clear)
+				{
+					STATE_Display = StateDisplay_Start;
+				}
+				else
+				{
+					STATE_Display = StateDisplay_Error;
+				}
+				break;
+			case StateDisplay_LED2:
+				if(ButtonMatrixState == StateNumber_Clear)
+				{
+					STATE_Display = StateDisplay_Start;
+				}
+				break;
+			case StateDisplay_Error:
+				if(ButtonMatrixState == StateNumber_Clear)
+				{
+					STATE_Display = StateDisplay_Start;
+				}
+				else
+				{
+					STATE_Display = StateDisplay_Error;
+				}
+				break;
+	  	  }
+	  }
+	  if(STATE_Display == StateDisplay_LED2)
+		{
+			HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_SET);
+		}
+	  else
+	  {
+		  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_RESET);
 	  }
 	  ButtonState[1] = ButtonState[0];
 
@@ -601,7 +613,7 @@ uint16_t      ButtonMatrixPin [8] = {GPIO_PIN_10, GPIO_PIN_3, GPIO_PIN_5, GPIO_P
 uint8_t       ButtonMatrixLine    = 0;
 void ButtonMatrixUpdate()
 {
-	if(HAL_GetTick() - ButtonMatrixTimeStamp >= 100)
+	if(HAL_GetTick() - ButtonMatrixTimeStamp >= 20)
 	{
 		ButtonMatrixTimeStamp = HAL_GetTick();
 		for(int i = 0; i < 4; i++)
